@@ -1,10 +1,21 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
-# Create your views here.
 def inicio(request):
-    return HttpResponse("Inventario del taller")
+    contexto = {"titulo": "Inventario de Taller VHAJ"}
+
+    return render(request, "inventario/inicio.html", contexto)
 
 
 def materiales(request):
-    return HttpResponse("Lista de materiales")
+    lista = [
+        {"nombre": "PLA", "color": "Negro", "cantidad": 1000},
+        {"nombre": "PETG", "color": "Blanco", "cantidad": 500},
+        {"nombre": "TPU", "color": "Rojo", "cantidad": 300},
+    ]
+    contexto = {
+        "titulo": "Materiales del taller",
+        "materiales": lista,
+    }
+
+    return render(request, "inventario/materiales.html", contexto)
